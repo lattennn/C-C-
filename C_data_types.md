@@ -15,4 +15,6 @@
 
     -> to be used via include directives, contain definitions of support types, (those definitions)that have additional properties
 
-    such as providing storage with an exact size, 这些定义具有其他属性 例如为存储提供精确的大小 independent of the language implementation on specific hardware platforms. 跟特定硬件平台上的语言实现无关
+    such as providing storage with an exact size, 这些定义具有其他属性 例如为存储提供精确的大小 
+    
+    independent of the language implementation on specific hardware platforms. 跟特定硬件平台上的语言实现无关
