@@ -1,3 +1,3 @@
 # C/C++
 
-Notes on C language
+Notes on C/C++ language
