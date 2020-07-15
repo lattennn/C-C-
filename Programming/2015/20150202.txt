@@ -1,0 +1,183 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<limits.h>
+#include<math.h>
+#define SUCESSFUL 0
+#define FAILURE 1
+
+const int minisum;
+
+typedef struct e{
+    int value;
+    int state;
+    int belongto;
+    int bestsum;
+}p_t;
+
+p_t *readFile(char*,int*);
+void calculate(int,int,p_t*);
+void split_recur(p_t*,int,int,int,int*,int*);
+//maxtime n-hir
+void writeFile(p_t*,int,int);
+
+int main(int argc,char* argv[]){
+    p_t *p;
+    int i,nhir,num,maxtime,*array,*hir;
+
+    if(argc<4){
+        printf("ERROR PARAMATERS\n");
+        exit(FAILURE);
+    }
+
+    nhir=atoi(argv[3]);
+
+    hir = (int*)malloc(nhir*sizeof(int));
+    if(hir==NULL){
+        printf("ERROR ALLOCATION\n");
+        exit(FAILURE);
+    }
+
+    for(i=0;i<hir;i++){
+        hir[i]=0;
+    }
+
+    p=readFile(argv[1],&num);
+
+    array = (int*)malloc(num*sizeof(int));
+    if(array=NULL){
+        printf("ERROR ALLOCATION!\n");
+        exit(FAILURE);
+    }
+
+    for(i=0;i<num;i++){
+        array[i]=0;
+    }
+
+    minisum=INT_MAX;
+
+
+    if(num>=nhir){
+       maxtime=num-nhir;
+       split_recur(p,num,nhir,maxtime,0,array,hir);
+    }
+    else{
+        printf("Not enough poverty!\n");
+        exit(FAILURE);
+    }
+    writeFile(p,num,nhir);
+
+    free(p);
+    free(array);
+    free(hir);
+    return SUCCESS;
+}
+
+p_t *readFile(char *fname,int *number){
+    FILE *fp;
+    p_t* p;
+    int i=0,memo;
+
+    fp=fopen(fname,"r");
+    if(fp==NULL){
+        printf("ERROR IN OPENING THE FILE\n");
+        exit(FAILURE);
+    }
+
+    if(fscanf(fp,"%d",number)==EOF){
+        printf("ERROR IN OPENING THE FILE\n");
+        exit(FAILURE);
+    }
+
+    p = (p_t*)malloc((*number)*sizeof(p_t));
+    if(p==NULL){
+        printf("ERROR ALLOCATION\n");
+        exit(FAILURE);
+    }
+
+    while(i<(*number)&&fscanf(fp,"%d",&memo)!=EOF){
+        p[i].value = memo;
+        p[i].state = -1;
+        p[i].belongto = -1;
+  //      p[i].bestsum = INT_MAX;
+        i++;
+    }
+    fclose(fp);
+    return p;
+}
+
+void split_recur(p_t *pt,int pnum,int nhir,int maxtime,int level,int *array,int *hir){
+    int i;
+    if(level==nhir){
+        calculate(pnum,nhir,p);
+        return;
+    }
+
+    for(i=0;i<pnum;i++){
+      if(array[i]==0){
+            array[i]=1;
+            pt[i].state = level;
+            hir[level]++;
+            if(hir[level]>=maxtime-1){
+            split(pt,pnum,nhir,maxtime,level+1,array,hir);
+            array[i]=0;
+            pt[i].state = -1;
+            hir[level]--;
+         }
+      }
+    }
+    return;
+
+}
+
+void calculate(int hnum,int pnum,p_t *p){
+    int i,k,min,sum=0;
+    int *array = (int*)malloc(hnum*sizeof(int));
+    if(array==NULL){
+        printf("error allocation!\n");
+        exit(FAILURE);
+    }
+
+    for(k=0;k<pnum;k++){
+      for(i=0;i<pnum;i++){
+        if(p[i].state == k){
+            array[k]=array[k]+p[i].value;
+        }
+      }
+    }
+
+    for(i=0;i<hnum;i++){
+        for(k=i+1;k<hnum;k++){
+            sum+=abs(array[i]-array[j]);
+        }
+    }
+
+    if(sum<minisum){
+        minisum = sum;
+        for(i=0;i<pnum;i++){
+            p[i].belongto = p[i].state;
+        }
+        return;
+    }
+    return;
+}
+void writeFile(p_t *p,int pnum,int hnum,char *foutname){
+    FILE *fout;
+    int i,index=0;
+
+    fout=fopen(foutname,"w");
+    if(fout==NULL){
+        printf("Error Allocation\n");
+        exit(FAILURE);
+    }
+
+    while(index<hnum){
+       for(i=0;i<pnum;i++){
+            if(p[i].belongto == index){
+                fprintf(fout,"%d ",p[i].value);
+            }
+       }
+       printf("\n");
+    }
+    return;
+}
