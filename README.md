@@ -1,3 +1,4 @@
-# C/C++
 
-Notes on C/C++ language
+# C
+
+Basic algorithm problems
