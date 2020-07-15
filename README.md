@@ -1,4 +1,4 @@
 
-# C
+# C language
 
 Basic algorithm problems
