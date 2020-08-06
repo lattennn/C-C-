@@ -1,8 +1,37 @@
+
+# From labuladong:https://labuladong.gitbook.io/algo/di-ling-zhang-bi-du-xi-lie/er-fen-cha-zhao-xiang-jie
+# Smart way:
+
+int binarySearch(int[] nums, int target) {
+    int left = 0; 
+    int right = nums.length - 1; // æ³¨æ„
+
+    while(left <= right) {
+        int mid = left + (right - left) / 2;
+        if(nums[mid] == target)
+            return mid; 
+        else if (nums[mid] < target)
+            left = mid + 1; // æ³¨æ„
+        else if (nums[mid] > target)
+            right = mid - 1; // æ³¨æ„
+    }
+    return -1;
+}
+
+
+
+
+
+
+
+#STUPID WAY:
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #define N 10
 
- // ÅĞ¶Ï¶à¸öÌõ¼şÊ± Ìõ¼şºÍÌõ¼şÖ®¼äµÄ¹ØÏµ Ò»°ã¶¼ÊÇ && AND Í¬Ê±³ÉÁ¢ ||OR ÆäÖĞÒ»¸ö³ÉÁ¢
+ // åˆ¤æ–­å¤šä¸ªæ¡ä»¶æ—¶ æ¡ä»¶å’Œæ¡ä»¶ä¹‹é—´çš„å…³ç³» ä¸€èˆ¬éƒ½æ˜¯ && AND åŒæ—¶æˆç«‹ ||OR å…¶ä¸­ä¸€ä¸ªæˆç«‹
 
 int main()
 {
@@ -17,7 +46,7 @@ int main()
     right=N-1;
     mid=(left+right)/2;
     while( left<right && mid>=0 && mid<=N-1 ){//mid go out as soon as left==right or left > right
-        if(left==right-1){ //Ö»ÒªleftºÍrightÖ¸ÕëÏàÁÚ Èç¹û²»Ğ´Õâ²¿ midÓÀÔ¶»áµÈÓÚleft È»ºó»áÎŞÏŞÑ­»· ÎŞ·¨ÍË³ö
+        if(left==right-1){ //åªè¦leftå’ŒrightæŒ‡é’ˆç›¸é‚» å¦‚æœä¸å†™è¿™éƒ¨ midæ°¸è¿œä¼šç­‰äºleft ç„¶åä¼šæ— é™å¾ªç¯ æ— æ³•é€€å‡º
             if(a[left]==n){
                 mid=left;
                 flag=1;
@@ -36,8 +65,8 @@ int main()
             mid=(left+right)/2;
         }
 
-    ///////ÉÏÃæµÄif ºÍelseÊÇÒ»ÆğµÄ
-    // ÏÂÃæµÄif else if ºÍelse ÊÇÒ»ÆğµÄ
+    ///////ä¸Šé¢çš„if å’Œelseæ˜¯ä¸€èµ·çš„
+    // ä¸‹é¢çš„if else if å’Œelse æ˜¯ä¸€èµ·çš„
         if(a[mid]<n){
             left=mid;
         }
@@ -49,7 +78,7 @@ int main()
             break;
         }
         else{
-            break;//ÎªÁËÑÏ½÷ Ğ´ÉÏ ÆäÊµÒ»°ãÃ»ÓĞÕâ¸öÇé¿ö
+            break;//ä¸ºäº†ä¸¥è°¨ å†™ä¸Š å…¶å®ä¸€èˆ¬æ²¡æœ‰è¿™ä¸ªæƒ…å†µ
         }
     }
 
