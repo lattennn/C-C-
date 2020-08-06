@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void PrintStars(n)
+void PrintStars(int n)
 {
     int i;
     for(i=0;i<n;i++){
@@ -10,7 +10,7 @@ void PrintStars(n)
     printf("\n");
     if(n==1){
         return;
-    }//»òÕß¿ÉÒÔ°Ñ n==0 µÄÌõ¼þ Ð´ÔÚ×î¿ªÊ¼ ÕâÑùÒ»¿ÅÐÇÐÇ´òÍêÖ®ºó¾Í»án=0 È»ºó¾Íreturn
+    }//æˆ–è€…å¯ä»¥æŠŠ n==0 çš„æ¡ä»¶ å†™åœ¨æœ€å¼€å§‹ è¿™æ ·ä¸€é¢—æ˜Ÿæ˜Ÿæ‰“å®Œä¹‹åŽå°±ä¼šn=0 ç„¶åŽå°±return
     PrintStars(n-1);
 
 }
