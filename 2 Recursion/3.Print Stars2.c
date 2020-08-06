@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void PrintStars(n)
+void PrintStars(int n)
 {
     int i;
     if(n==0){
