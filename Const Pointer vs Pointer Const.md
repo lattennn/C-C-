@@ -1,6 +1,11 @@
 
 [Reference](https://blog.csdn.net/jackystudio/article/details/11519817)
 
+## 常量指针 vs 指针常量
+
+本质上：(1）此指针指向的对象->是常量(2）指针本身是常量。
+
+
 ## 变量和常量
 
 ```c++
