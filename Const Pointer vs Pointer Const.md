@@ -45,6 +45,6 @@ int Const *p;
 ## 常量指针常量
 
 ```c
-Const int* Const p;
+Const int* Const p = &a;
 ```
 是个*指向常量* 的*指针类型* 的常量，既不可以更改指向的内存位置，又不可以更改指向的内存里的东西。
